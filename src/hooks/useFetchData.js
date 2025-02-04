@@ -5,24 +5,29 @@ export const useFetchData = () => {
   const { state, dispatch } = useContext(DataContext);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAllData = async () => {
       dispatch({ type: 'FETCH_START' });
+      let allCharacters = [];
+      let nextPage = 'https://swapi.dev/api/people/?page=1';
 
       try {
-        const response = await fetch(
-          `https://swapi.dev/api/${state.endpoint}/?page=${state.currentPage}`,
-        );
-        if (!response.ok) {
-          throw new Error(response.status);
+        while (nextPage) {
+          const response = await fetch(nextPage);
+          if (!response.ok) {
+            throw new Error(`Błąd: ${response.status}`);
+          }
+          const data = await response.json();
+
+          allCharacters = [...allCharacters, ...data.results];
+          nextPage = data.next;
         }
-        const data = await response.json();
 
         dispatch({
           type: 'FETCH_SUCCESS',
           payload: {
-            data: data.results,
-            count: data.count,
-            totalPages: Math.ceil(data.count / 10),
+            data: allCharacters,
+            count: allCharacters.length,
+            totalPages: Math.ceil(allCharacters.length / 10),
           },
         });
       } catch (error) {
@@ -30,8 +35,8 @@ export const useFetchData = () => {
       }
     };
 
-    fetchData();
-  }, [state.endpoint, state.currentPage, dispatch]);
+    fetchAllData();
+  }, [dispatch]);
 
   return state;
 };
