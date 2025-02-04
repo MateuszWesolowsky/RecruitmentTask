@@ -4,17 +4,32 @@ import { DataContext } from '../context/DataContext';
 export const FilterInput = () => {
   const { dispatch } = useContext(DataContext);
   const [search, setSearch] = useState('');
+  const [controller, setController] = useState(null);
 
   const handleInputChange = async (e) => {
     const value = e.target.value;
     setSearch(value);
+
+    if (controller) {
+      controller.abort();
+    }
+
+    const newController = new AbortController();
+    setController(newController);
 
     dispatch({ type: 'FETCH_START' });
 
     try {
       const response = await fetch(
         `https://swapi.dev/api/people/?search=${value}`,
+        {
+          signal: newController.signal,
+        },
       );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
 
       const data = await response.json();
 
@@ -27,7 +42,9 @@ export const FilterInput = () => {
         },
       });
     } catch (error) {
-      dispatch({ type: 'FETCH_ERROR', payload: error.message });
+      if (error.name !== 'AbortError') {
+        dispatch({ type: 'FETCH_ERROR', payload: error.message });
+      }
     }
   };
 
