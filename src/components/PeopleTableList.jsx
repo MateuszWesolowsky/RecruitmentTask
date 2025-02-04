@@ -1,9 +1,16 @@
-import { useContext } from 'react';
-import { DataContext } from '../context/DataContext';
 import { PeopleTableRow } from './PeopleTableRow';
+import { Spinner } from '../components/Spinner';
+import { useFetchData } from '../hooks/useFetchData';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 export const PeopleTableList = () => {
-  const { state } = useContext(DataContext);
+  const state = useFetchData();
+
+  const { data, loading, error } = state;
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -20,11 +27,12 @@ export const PeopleTableList = () => {
           </tr>
         </thead>
         <tbody>
-          {state.data?.map((person) => (
-            <PeopleTableRow data={person} key={Math.random()} />
+          {data?.map((person, index) => (
+            <PeopleTableRow data={person} index={index} key={Math.random()} />
           ))}
         </tbody>
       </table>
+      {error && <ErrorMessage />}
     </div>
   );
 };
