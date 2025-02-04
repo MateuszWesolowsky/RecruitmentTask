@@ -2,10 +2,8 @@ import { useContext, useState } from 'react';
 import { DataContext } from '../context/DataContext';
 
 export const FilterInput = () => {
-  const { state, dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
   const [search, setSearch] = useState('');
-
-  console.log(state);
 
   const handleInputChange = async (e) => {
     const value = e.target.value;
