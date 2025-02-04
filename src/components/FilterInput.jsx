@@ -9,8 +9,6 @@ export const FilterInput = () => {
     const value = e.target.value;
     setSearch(value);
 
-    if (value.length === 0) return;
-
     dispatch({ type: 'FETCH_START' });
 
     try {
