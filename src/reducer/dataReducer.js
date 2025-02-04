@@ -2,7 +2,6 @@ export const initialState = {
   data: [],
   loading: false,
   error: null,
-  endpoint: 'people',
   currentPage: 1,
   totalPages: 1,
 };
