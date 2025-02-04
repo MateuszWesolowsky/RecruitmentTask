@@ -26,7 +26,6 @@ export const useFetchData = () => {
           },
         });
       } catch (error) {
-        console.log(error, 'smg');
         dispatch({ type: 'FETCH_ERROR', payload: error.message });
       }
     };
