@@ -9,6 +9,8 @@ export const SingleViewPage = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const title = details.name;
+
   useEffect(() => {
     (async () => {
       try {
@@ -30,6 +32,14 @@ export const SingleViewPage = () => {
       }
     })();
   }, [id]);
+
+  useEffect(() => {
+    if (!title) return;
+    document.title = `StarWars | ${title}`;
+    return () => {
+      document.title = 'StarWars Explorer';
+    };
+  }, [title]);
 
   return (
     <div className="p-1 sm:p-4 mt-8 ">
