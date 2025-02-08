@@ -2,13 +2,15 @@ import { useContext, useState } from 'react';
 import { DataContext } from '../context/DataContext';
 
 export const FilterInput = () => {
-  const { dispatch } = useContext(DataContext);
-  const [search, setSearch] = useState('');
+  const { state, dispatch } = useContext(DataContext);
   const [controller, setController] = useState(null);
 
   const handleInputChange = async (e) => {
     const value = e.target.value;
-    setSearch(value);
+
+    dispatch({ type: 'SET_SEARCH_VALUE', payload: value });
+
+    if (!value) return;
 
     if (controller) {
       controller.abort();
@@ -41,6 +43,11 @@ export const FilterInput = () => {
           totalPages: Math.ceil(data.count / 10),
         },
       });
+
+      dispatch({
+        type: 'SET_PAGE',
+        payload: 1,
+      });
     } catch (error) {
       if (error.name !== 'AbortError') {
         dispatch({ type: 'FETCH_ERROR', payload: error.message });
@@ -51,7 +58,7 @@ export const FilterInput = () => {
   return (
     <input
       type="text"
-      value={search}
+      value={state.inputSearch}
       placeholder="Search by name"
       onChange={handleInputChange}
       className="w-full px-4 py-2 text-gray-700 border rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
