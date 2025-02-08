@@ -5,16 +5,19 @@ export const useFetchData = () => {
   const { state, dispatch } = useContext(DataContext);
 
   useEffect(() => {
+    if (state.inputSearch) return;
+
     const fetchData = async () => {
       dispatch({ type: 'FETCH_START' });
 
       try {
         const response = await fetch(
-          `https://swapi.dev/api/people/?page=${state.currentPage}`,
+          `https://swapi.dev/api/people/?page=${state.page}`,
         );
         if (!response.ok) {
           throw new Error(response.status);
         }
+
         const data = await response.json();
 
         dispatch({
@@ -31,7 +34,7 @@ export const useFetchData = () => {
     };
 
     fetchData();
-  }, [state.endpoint, state.currentPage, dispatch]);
+  }, [state.endpoint, state.page, state.inputSearch, dispatch]);
 
   return state;
 };
