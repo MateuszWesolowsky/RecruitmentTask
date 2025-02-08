@@ -4,9 +4,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import { ErrorMessage } from '../components/ErrorMessage';
 
 export const PeopleTableList = () => {
-  const state = useFetchData();
-
-  const { data, loading, error } = state;
+  const { data, loading, error } = useFetchData();
 
   if (loading) {
     return <Spinner />;
@@ -14,16 +12,30 @@ export const PeopleTableList = () => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table-auto w-full bg-white border border-gray-300 shadow-lg">
+      <table className="min-w-full table-auto bg-white border border-gray-300 shadow-lg">
         <thead>
           <tr className="bg-gray-100 text-center">
-            <th className="border border-gray-400 p-2">Name</th>
-            <th className="border border-gray-400 p-2">Height</th>
-            <th className="border border-gray-400 p-2">Mass</th>
-            <th className="border border-gray-400 p-2">Birth Year</th>
-            <th className="border border-gray-400 p-2">Eye color</th>
-            <th className="border border-gray-400 p-2">Hair color</th>
-            <th className="border border-gray-400 p-2">Skin color</th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Name
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Height
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Mass
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Birth Year
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Eye color
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Hair color
+            </th>
+            <th className="border border-gray-400 p-2 whitespace-nowrap">
+              Skin color
+            </th>
           </tr>
         </thead>
         <tbody>
