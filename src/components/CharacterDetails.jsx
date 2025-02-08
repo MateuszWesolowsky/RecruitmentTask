@@ -20,7 +20,7 @@ export const CharacterDetails = ({ details, error, isLoading }) => {
           </tr>
         </thead>
         <tbody>
-          <tr className="text-center hover:bg-gray-100 cursor-pointer">
+          <tr className="text-center">
             <td className="border border-gray-400 p-2">{name}</td>
             <td className="border border-gray-400 p-2">{gender}</td>
             <td className="border border-gray-400 p-2">{homeworld}</td>
