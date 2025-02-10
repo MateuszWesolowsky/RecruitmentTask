@@ -1,12 +1,50 @@
-# RecruitmentTask
+# Star Wars Data Explorer
 
-# Recruitment Task
+A React application that consumes the [SWAPI](https://swapi.dev/) (Star Wars API) to display data in a table with pagination, filtering, and detailed view.
 
-# React + Vite
+## Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Star Wars Data Explorer** enables users to:
 
-Currently, two official plugins are available:
+- Browse Star Wars characters
+- Navigate through pages of data using pagination
+- Filter/search for characters by name
+- View detailed information by clicking on a table row
+- Enjoy a responsive, modern user interface with error handling and loading states
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **Data Display:**  
+  Renders data from SWAPI in a well-structured table.
+
+- **Pagination:**  
+  Navigate through data pages using Previous/Next buttons.
+
+- **Filtering:**  
+  Filter characters by name in real-time.
+
+- **Detail View:**  
+  Click on a character or planet row to see detailed information fetched via a custom hook.
+
+- **Global State Management:**  
+  Uses `useReducer` and Context API to manage and share state across components.
+
+- **Testing:**  
+  Unit tests written with Vitest and React Testing Library.
+
+## Technologies Used
+
+- **React:** UI library for building interactive interfaces.
+- **Vite:** Fast build tool and development server.
+- **Tailwind CSS:** Utility-first CSS framework for styling.
+- **Vitest:** Framework for tests.
+
+## Installation
+
+git clone
+npm install
+npm run dev
+
+## Testing
+
+npm run test
