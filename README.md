@@ -41,10 +41,10 @@ A React application that consumes the [SWAPI](https://swapi.dev/) (Star Wars API
 
 ## Installation
 
-git clone
-npm install
-npm run dev
+- **git clone**
+- **npm install**
+- **npm run dev**
 
 ## Testing
 
-npm run test
+- **npm run test**
