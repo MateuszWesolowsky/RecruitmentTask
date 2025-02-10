@@ -5,6 +5,7 @@ export const CharacterDetails = ({ details, error, isLoading }) => {
   if (isLoading) {
     return <Spinner />;
   }
+
   const { name, gender, homeworld } = details;
 
   return (
@@ -26,7 +27,7 @@ export const CharacterDetails = ({ details, error, isLoading }) => {
             <td className="border border-gray-400 p-2">{homeworld}</td>
             <td className="border border-gray-400 p-2">
               {details?.films?.map((el, i) => (
-                <li key={i} className=" list-none">
+                <li key={i} className="list-none">
                   {el}
                 </li>
               ))}
